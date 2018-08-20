@@ -1,0 +1,43 @@
+.card {
+    height: 100%;
+    color: #093c88;
+    background-color: #ddd2;
+    border-radius: 36px 36px 3px 3px;
+    box-shadow: 4px 10px 20px #11221188;
+    display: grid;
+    grid-template-columns: 20px 1fr 20px 20px;
+    grid-template-rows: 300px 1fr;
+    transition: background 0.2s ease;
+}
+
+.screenshot {
+    height: 95%;
+    width: 96%;
+    margin: auto;
+    border-radius: 30px;
+    object-fit: cover;
+    grid-column: 1 / 5;
+}
+
+.description {
+    grid-column: 2 / 4;
+    grid-row: 2;
+}
+
+.vote-count {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    background-color: #0000;
+    cursor: default;
+    border: none;
+    text-align: right;
+}
+
+.heart-holder {
+    grid-column: 4;
+    grid-row: 3;
+}
+
+.card:hover {
+    background-color: #ddd6;
+}
