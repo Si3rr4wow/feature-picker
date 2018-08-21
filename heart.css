@@ -1,5 +1,5 @@
 .heart.icon {
-  color: #000;
+  color: rgb(194, 194, 194);
   position: absolute;
   margin-top: 6px;
   margin-left: 5px;
@@ -9,7 +9,7 @@
   border-bottom: solid 1px currentColor;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
-  transition: color 0.5s ease;
+  transition: color 0.2s ease;
 }
 
 .heart.icon:before {
@@ -39,9 +39,9 @@
 }
 
 .heart.icon:hover {
-  color: #ff2255;
+  color: #aee8e5;
 }
 
 .hearted {
-  color: #ff2255 !important;
+  color: #00BCB4 !important;
 }

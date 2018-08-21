@@ -1,6 +1,7 @@
 .card {
     height: 100%;
-    color: #093c88;
+    color: #eee;
+    cursor: pointer;
     background-color: #ddd2;
     border-radius: 36px 36px 3px 3px;
     box-shadow: 4px 10px 20px #11221188;

@@ -4,7 +4,7 @@ function task(screenshotURL,description) {
     this._id = Math.floor(Math.random() * 1000);
     this.screenshotURL = screenshotURL;
     this.description = description;
-    this.voteCount = 0;
+    this.voteCount = Math.floor(Math.random() * 100);
     this.hearted = false;
     this.incrimentVotes = function() {
         this.voteCount++;
@@ -21,7 +21,7 @@ var urls = ["https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_42495185758715
 "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/31947082_1683860771696246_2587063655140950016_n.jpg?_nc_cat=0&oh=8678f33f4411e826ba9d237b78a859b3&oe=5BED383B",
 ]
 
-var descriptions = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+var descriptions = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
@@ -32,6 +32,7 @@ for(var i = 0; i < urls.length; i++) {
     tasks.push(new task(urls[i],descriptions[i]));
 }
 
+tasks.reverse(tasks.sort(function(a,b){return a.voteCount - b.voteCount}));
 
 //inserts cards and background on page load
 $(function() {
