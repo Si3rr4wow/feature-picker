@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-image: linear-gradient(to bottom right, #523845, #c42979); 
+    background-color: #523845; 
     display: grid;
     grid-gap: 10px;
     grid-auto-rows: 400px; 
@@ -31,7 +31,7 @@ body {
     width: 70%;
     background-color: #654455;
     clip-path: polygon(45% 0%, 100% 0%, 100% 100%, 0% 100%);
-    background: linear-gradient(to bottom right, #523845, #c42979);
+    background: linear-gradient(to top left, #523845, #c42979);
     z-index: -1;
   }
 

@@ -26,6 +26,7 @@
 }
 
 .vote-count {
+    color: #eee;
     grid-column: 2 / 4;
     grid-row: 3;
     background-color: #0000;

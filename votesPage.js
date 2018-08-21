@@ -10,7 +10,7 @@ function task(screenshotURL,description) {
         this.voteCount++;
         this.hearted = true;
         $('#' + this._id + ' .vote-count').val(this.voteCount);
-        console.log("Increasing task " + this._id + " to vote count " + this.voteCount);
+        //console.log("Increasing task " + this._id + " to vote count " + this.voteCount);
     }
 }
 
@@ -34,19 +34,19 @@ for(var i = 0; i < urls.length; i++) {
 
 tasks.reverse(tasks.sort(function(a,b){return a.voteCount - b.voteCount}));
 
-//inserts cards and background on page load
+//on load
 $(function() {
+    
+    //inserts cards and background on page load
     tasks.forEach(function(dataRecord) {
         var card = $(createCard(dataRecord));
         $('body').append(card);
     });
     
-    $('body').append($('<div class="slab"></div>'))
-
-
+    $('body').append($('<div class="slab"></div>')) //attach the slab after 
 
     $('.heart.icon').click(function() {
-        console.log("the id of this card is " + $(this).parentsUntil(".card-container",".card").attr('id'));
+        //console.log("the id of this card is " + getCardId($(this)));
         for(var i = 0; i < tasks.length; i++) {
             if(tasks[i]._id == $(this).parentsUntil(".card-container",".card").attr('id') && tasks[i].hearted == false) {
                 tasks[i].incrimentVotes();
@@ -55,6 +55,12 @@ $(function() {
         }
     });
 });
+
+//gets the id of the card whose child has been clicked. Pass it jquery objects
+function getCardId(element) {
+    return element.parentsUntil(".card-container",".card").attr('id')
+}
+
 //translates task data into a card
 function createCard(dataRecord) {
     var heartedClass = null;
@@ -71,9 +77,3 @@ function createCard(dataRecord) {
         </div>
     </div>`;
 }
-//add one to the current vote count
-/*function incrimentVotes() {
-    var inc = +$('.vote-count').val() + 1;
-    tasks[0].voteCount++;
-    $('.vote-count').val(inc);
-};*/
