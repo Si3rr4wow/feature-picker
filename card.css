@@ -1,6 +1,5 @@
 .card {
     height: 100%;
-    color: #eee;
     cursor: pointer;
     background-color: #ddd2;
     border-radius: 36px 36px 3px 3px;
@@ -20,7 +19,7 @@
     grid-column: 1 / 5;
 }
 
-.description {
+.title {
     grid-column: 2 / 4;
     grid-row: 2;
 }

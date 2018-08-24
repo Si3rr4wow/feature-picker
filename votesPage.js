@@ -1,8 +1,9 @@
 var tasks = [];
 
-function task(screenshotURL,description) {
+function task(screenshotURL, title, description) {
     this._id = Math.floor(Math.random() * 1000);
     this.screenshotURL = screenshotURL;
+    this.title = title;
     this.description = description;
     this.voteCount = Math.floor(Math.random() * 100);
     this.hearted = false;
@@ -21,6 +22,13 @@ var urls = ["https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_42495185758715
 "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/31947082_1683860771696246_2587063655140950016_n.jpg?_nc_cat=0&oh=8678f33f4411e826ba9d237b78a859b3&oe=5BED383B",
 ]
 
+var titles = ["Lorem ipsum dolor.",
+"Lorem ipsum dolor.",
+"Lorem ipsum dolor.",
+"Lorem ipsum dolor.",
+"Lorem ipsum dolor.",
+]
+
 var descriptions = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
@@ -29,7 +37,7 @@ var descriptions = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 ]
 
 for(var i = 0; i < urls.length; i++) {
-    tasks.push(new task(urls[i],descriptions[i]));
+    tasks.push(new task(urls[i], titles[i], descriptions[i]));
 }
 
 tasks.reverse(tasks.sort(function(a,b){return a.voteCount - b.voteCount}));
@@ -38,42 +46,96 @@ tasks.reverse(tasks.sort(function(a,b){return a.voteCount - b.voteCount}));
 $(function() {
     
     //inserts cards and background on page load
-    tasks.forEach(function(dataRecord) {
-        var card = $(createCard(dataRecord));
+    tasks.forEach(function(task) {
+        var card = $(createCard(task));
         $('body').append(card);
     });
     
     $('body').append($('<div class="slab"></div>')) //attach the slab after 
+    $('body').append($('<div class="modal-backdrop hidden"></div>')) //attach the modal backdrop after 
 
-    $('.heart.icon').click(function() {
+    $('.heart.icon').click(function(element) {
+        element.stopPropagation();
         //console.log("the id of this card is " + getCardId($(this)));
-        for(var i = 0; i < tasks.length; i++) {
-            if(tasks[i]._id == $(this).parentsUntil(".card-container",".card").attr('id') && tasks[i].hearted == false) {
-                tasks[i].incrimentVotes();
-                $(this).addClass('hearted')
-            }
+        if(!clickedTask) {
+            var clickedTask = tasks.find(task => task._id == getCardId($(this)))
+        }
+        if(!clickedTask.hearted) {
+            clickedTask.incrimentVotes();
+            $(this).addClass('hearted')
         }
     });
+    $('.card').click(function() {
+        var clickedTask = tasks.find(task => task._id == getCardId($(this)))
+        var cardDetails = $(createCardDetails(clickedTask))
+        $('.modal-backdrop').append(cardDetails)
+        $('.modal-backdrop').removeClass('hidden');
+
+        $('.heart.icon').click(function(element) {
+            element.stopPropagation();
+            //console.log("the id of this card is " + getCardId($(this)));
+            console.log(clickedTask);
+            if(!clickedTask) {
+                var clickedTask = tasks.find(task => task._id == getCardId($(this)))
+            }
+            console.log(clickedTask);
+            if(!clickedTask.hearted) {
+                clickedTask.incrimentVotes();
+                $(this).addClass('hearted');
+            }
+        });
+
+        $('.close-holder').click(function() {
+            $('.modal-backdrop').html('');
+            $('.modal-backdrop').addClass('hidden');
+        });
+    })
 });
 
 //gets the id of the card whose child has been clicked. Pass it jquery objects
 function getCardId(element) {
-    return element.parentsUntil(".card-container",".card").attr('id')
+    console.log(element.parentsUntil(".modal-backdrop",".card-details"))
+    if(element.parentsUntil(".modal-backdrop",".card-details").attr('id')) {
+        return element.parentsUntil(".modal-backdrop",".card-details").attr('id');
+    }
+    else if(element.parentsUntil(".card-container",".card").attr('id') == null){
+        return element.attr('id');
+    } else {
+        return element.parentsUntil(".card-container",".card").attr('id');
+    }
 }
 
 //translates task data into a card
-function createCard(dataRecord) {
+function createCard(task) {
     var heartedClass = null;
-    if(dataRecord.hearted) {heartedClass = "hearted"}
+    if(task.hearted) {heartedClass = "hearted"}
     return `
     <div class="card-container">
-        <div id="${dataRecord._id}" class="card">
-            <img class="screenshot" src="${dataRecord.screenshotURL}"/>
-            <p class="description">${dataRecord.description}</p>
-            <input readonly type="number" value="${dataRecord.voteCount}" class="vote-count"></input>
+        <div id="${task._id}" class="card">
+            <img class="screenshot" src="${task.screenshotURL}"/>
+            <h2 class="title">${task.title}</h2>
+            <input readonly type="number" value="${task.voteCount}" class="vote-count"></input>
             <span class="heart-holder">
                 <div class="heart icon ` + heartedClass + ` " ></div>
             </span>
         </div>
     </div>`;
+}
+
+function createCardDetails(task) {
+    var heartedClass = null;
+    if(task.hearted) {heartedClass = "hearted"}
+    return `
+    <div id="${task._id}" class="card-details">
+        <div class="close-holder">
+            <div class="close">X</div>
+        </div>
+        <img class="screenshot" src="${task.screenshotURL}"/>
+        <h2 class="title">${task.title}</h2>
+        <input readonly type="number" value="${task.voteCount}" class="vote-count"></input>
+        <!--<span class="heart-holder">
+            <div class="heart icon ` + heartedClass + ` " ></div>
+        </span>-->
+        <p class="task-description">${task.description}</p>
+    </div>`
 }
