@@ -1,0 +1,20 @@
+<body>
+    {{#each tasks}}
+        {{> task}}
+    {{/each}}
+    <div class="slab"></div>
+    <div class="modal-backdrop hidden"></div>
+</body>
+    
+<template name="task">
+    <div class="card-container">
+        <div class="card">
+            <img class="screenshot" src="{{screenshotURL}}"/>
+            <h2 class="title">{{title}}</h2>
+            <input readonly type="number" value="{{voteCount}}" class="vote-count"/>
+            <span class="heart-holder">
+                <div class="heart icon"></div>
+            </span>
+        </div>
+    </div>
+</template>
