@@ -1,0 +1,26 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="heart.css"></link>
+  <link rel="stylesheet" type="text/css" href="card.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+  <title>feature-picker</title>
+</head>
+<body>
+  {{#each tasks}}
+    {{> task}}
+  {{/each}}
+  <div class="slab"></div>
+  <div class="modal-backdrop hidden"></div>
+</body>
+
+<template name="task">
+    <div class="card-container">
+        <div class="card">
+            <img class="screenshot" src="{{screenshotURL}}"/>
+            <h2 class="title">{{title}}</h2>
+            <input readonly type="number" value="{{voteCount}}" class="vote-count"/>
+            <span class="heart-holder">
+                <div class="heart icon"></div>
+            </span>
+        </div>
+    </div>
+</template>
