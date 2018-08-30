@@ -7,48 +7,49 @@ import './components/task.js';
 
 var defaultTasks = [
     {
-        screenshotURL: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_424951857587150_341858507_n.jpg?_nc_cat=0&oh=e5340c6b09639fe6658ecd499417be7e&oe=5C049A33',
+        screenshotURL: 'https://www.gstatic.com/webp/gallery3/1.png',
         title: 'Lorem ipsum dolor',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
         voteCount: Math.floor(Math.random() * 100),
-        hearted: Math.round(Math.random),
+        hearted: true,
     },
     {
-        screenshotURL: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_424951857587150_341858507_n.jpg?_nc_cat=0&oh=e5340c6b09639fe6658ecd499417be7e&oe=5C049A33',
+        screenshotURL: 'https://www.gstatic.com/webp/gallery3/5.png',
         title: 'Lorem ipsum dolor',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
         voteCount: Math.floor(Math.random() * 100),
-        hearted: Math.round(Math.random),
+        hearted: true,
     },
     {
-        screenshotURL: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_424951857587150_341858507_n.jpg?_nc_cat=0&oh=e5340c6b09639fe6658ecd499417be7e&oe=5C049A33',
+        screenshotURL: 'http://www.gstatic.com/webp/gallery/1.jpg',
         title: 'Lorem ipsum dolor',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
-        voteCount: Math.floor(Math.random() * 100),
-        hearted: Math.round(Math.random),
+        voteCount: 22,
+        hearted: true,
     },
     {
-        screenshotURL: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_424951857587150_341858507_n.jpg?_nc_cat=0&oh=e5340c6b09639fe6658ecd499417be7e&oe=5C049A33',
+        screenshotURL: 'http://www.gstatic.com/webp/gallery/2.jpg',
         title: 'Lorem ipsum dolor',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
-        voteCount: Math.floor(Math.random() * 100),
-        hearted: Math.round(Math.random),
+        voteCount: 22,
+        hearted: false,
     },
     {
-        screenshotURL: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/559756_424951857587150_341858507_n.jpg?_nc_cat=0&oh=e5340c6b09639fe6658ecd499417be7e&oe=5C049A33',
+        screenshotURL: 'http://www.gstatic.com/webp/gallery/5.jpg',
         title: 'Lorem ipsum dolor',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
         voteCount: Math.floor(Math.random() * 100),
-        hearted: Math.round(Math.random),
+        hearted: true,
     }
 ]
 
 Template.body.helpers({
     tasks() {
-        if(Tasks.find({}).count() == 0) {
-            return defaultTasks;
-        } else {
-            return Tasks.find({});
+        if(Tasks.find({}).count() === 0) {
+            defaultTasks.forEach(function(task) {
+                Tasks.insert(task);
+            })  
         }
+        return Tasks.find({}, {sort: { voteCount: -1 }});
     },
 });
