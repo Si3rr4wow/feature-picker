@@ -1,20 +1,21 @@
 <body>
-    {{#each tasks}}
-        {{> task}}
-    {{/each}}
-    <div class="slab"></div>
-    <div class="modal-backdrop hidden"></div>
-</body>
-    
-<!--<template name="task">
-    <div class="card-container">
-        <div class="card">
-            <img class="screenshot" src="{{screenshotURL}}"/>
-            <h2 class="title">{{title}}</h2>
-            <input readonly type="number" value="{{voteCount}}" class="vote-count"/>
-            <span class="heart-holder">
-                <div class="heart icon"></div>
-            </span>
+    <div class="header-bar">
+        <h3>SALON ADVANAGE</h3>
+        <div id="release-notes-drop-down" class="drop-down">
+            <h3>Release Notes ▾</h3>
+            <div class="li-container hidden">
+                {{#each releaseNotes}}    
+                    {{> releaseNoteLinks}}
+                {{/each}}
+            </div>
         </div>
+        {{> loginButtons}}
     </div>
-</template>-->
+    <div class="card-deck">
+        {{#each tasks}}
+            {{> task}}
+        {{/each}}
+        <div class="slab"></div>
+        {{> taskDetails}}
+    </div>
+</body>

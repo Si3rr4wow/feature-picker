@@ -5,7 +5,9 @@
             <h2 class="title">{{title}}</h2>
             <input readonly type="number" value="{{voteCount}}" class="vote-count"/>
             <span class="heart-holder">
+                {{#if currentUser}}
                 <div class="heart icon {{#if hearted}}hearted{{/if}}"></div>
+                {{/if}}
             </span>
         </div>
     </div>

@@ -45,3 +45,7 @@
 .hearted {
   color: rgb(0, 228, 216) !important;
 }
+
+.card-details .hearted {
+  color: rgb(0, 182, 173) !important;
+}

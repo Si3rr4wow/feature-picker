@@ -1,0 +1,18 @@
+<template name="taskDetails">
+    <div class="modal-backdrop hidden">
+        <div class="card-details">
+            <div class="close-holder">
+                <div class="close">X</div>
+            </div>
+            <img class="screenshot" src="{{clickedTask.screenshotURL}}"/>
+            <h2 class="title">{{clickedTask.title}}</h2>
+            <input readonly type="number" value="{{clickedTask.voteCount}}" class="vote-count"/>
+            <span class="heart-holder">
+                {{#if currentUser}}
+                <div class="heart icon {{#if hearted}}hearted{{/if}}" ></div>
+                {{/if}}
+            </span>
+            <p class="task-description">{{clickedTask.description}}</p>
+        </div>
+    </div>
+</template>
