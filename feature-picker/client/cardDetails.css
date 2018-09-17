@@ -1,0 +1,57 @@
+.card-details {
+    width: 786px;
+    margin: auto;
+    margin-top: 10%;
+    color: #654455;
+    background-color: #ececec;
+    border-radius: 36px 36px 3px 3px;
+    box-shadow: 4px 10px 20px #11221188;
+    display: grid;
+    grid-template-columns: 700px 46px 40px;
+    grid-template-areas: "img img img"
+                         "title vote heart"
+                         "desc desc desc";
+}
+
+.close-holder {
+    background: #111;
+    border-radius: 50%;
+    border: 2px solid #ececec;
+    width: 27px;
+    height: 27px;
+    display: grid;
+    z-index: 3;
+    cursor: default;
+}
+
+.close {
+    color: #ececec;
+    margin: auto;
+    font-weight: 900;
+}
+
+.card-details .screenshot {
+    height: 500px;
+    margin-top: 15px;
+    grid-area: img !important;
+}
+
+.card-details .title {
+    margin-left: 15px;
+    grid-area: title !important;
+}
+
+.card-details .vote-count {
+    grid-area: vote !important;
+    color: #654455;
+}
+
+.card-details .heart-holder {
+    margin-top: 24px;
+    grid-area: heart !important;
+}
+
+.card-details p {
+    margin: 0px 15px 15px 15px;
+    grid-area: desc !important;
+}
