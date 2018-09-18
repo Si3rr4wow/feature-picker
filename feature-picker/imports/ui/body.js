@@ -6,7 +6,7 @@ import { ReleaseNotes } from '../api/releaseNotes';
 import './body.html';
 import './components/task.js';
 import './components/taskDetails.js';
-import './components/releaseNotesLinks.js';
+import './components/releaseNoteLinks.js';
 
 var defaultTasks = [
     /*{
@@ -46,6 +46,10 @@ var defaultTasks = [
     }*/
 ]
 
+Template.registerHelper('prettyDate', function(date,format) {
+    return moment(new Date(date)).format(format);
+})
+
 Template.body.helpers({
     tasks() {
         if(Tasks.find({}).count() === 0) {
@@ -57,7 +61,7 @@ Template.body.helpers({
     },
     releaseNotes() {
         return ReleaseNotes.find({}, {sort: {createdAt: -1}});
-    }
+    },
 });
 
 Template.body.events({

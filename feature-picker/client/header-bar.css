@@ -7,6 +7,10 @@
     grid-template-columns: 180px 1fr 300px 276px;
 }
 
+li {
+    list-style: none;
+}
+
 h3 {
     margin: 10px 0px 10px 10px;
     font-weight: 400;
